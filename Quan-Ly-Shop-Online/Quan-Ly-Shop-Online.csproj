@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Assets\login_shop_icon.png" />
+    <Resource Include="Assets\*.png" />
   </ItemGroup>
 
   <ItemGroup>
