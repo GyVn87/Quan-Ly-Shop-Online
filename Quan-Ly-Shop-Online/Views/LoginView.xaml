@@ -1,0 +1,98 @@
+﻿<Window x:Class="Quan_Ly_Shop_Online.Views.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Quan_Ly_Shop_Online.Views"
+        xmlns:viewModels="clr-namespace:Quan_Ly_Shop_Online.ViewModels" 
+        xmlns:customControls="clr-namespace:Quan_Ly_Shop_Online.CustomControls"
+        mc:Ignorable="d"
+        Title="Đăng nhập - Quản lý shop" Height="520" Width="420"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+
+    <Window.DataContext>
+        <viewModels:LoginViewModel/>
+    </Window.DataContext>
+
+    <Window.Background>
+        <SolidColorBrush Color="#F5F7FA"/>
+    </Window.Background>
+  
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Phần tiêu đề & Logo -->
+        <StackPanel Grid.Row="0">
+            <Image Source="/Assets/login_shop_icon.png" Width="60"/>
+            <TextBlock Text="ĐĂNG NHẬP HỆ THỐNG" 
+                       FontWeight="Bold" 
+                       FontSize="25" 
+                       Foreground="#2D3748" 
+                       HorizontalAlignment="Center"/>
+            <TextBlock Text="Ứng dụng quản lí cửa hàng thông minh" 
+                       FontSize="15" 
+                       Foreground="#2D3748" 
+                       HorizontalAlignment="Center" 
+                       Margin="0,0,0,20"/>
+        </StackPanel>
+       
+
+        <!-- Nhập liệu thông tin đăng nhập -->
+        <StackPanel Grid.Row="1" 
+                    Margin="0,0,0,15">
+            <StackPanel.Resources>
+                <Style x:Key="RoundedInputBorder" TargetType="Border">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="BorderBrush" Value="#E2E8F0"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="CornerRadius" Value="6"/>
+                    <Setter Property="Height" Value="38"/>
+                    <Setter Property="Margin" Value="0,0,0,16"/>
+                    <Setter Property="Padding" Value="10,0"/>
+                </Style>
+            </StackPanel.Resources>
+            
+            <TextBlock Text="Tên đăng nhập" 
+                       FontWeight="DemiBold" 
+                       Margin="0,0,0,5"/>
+            <Border Style="{StaticResource RoundedInputBorder}">
+                <TextBox Height="30" 
+                         FontSize="20"
+                         BorderThickness="0"
+                         Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         VerticalContentAlignment="Center"
+                         Background="Transparent"/>
+            </Border>
+
+            <TextBlock Text="Mật khẩu" 
+                       FontWeight="DemiBold" 
+                       Margin="0,0,0,5"/>
+            <Border Style="{StaticResource RoundedInputBorder}">
+                <customControls:BindablePasswordBox Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </Border>
+        </StackPanel>
+        
+        <!-- Nút đăng nhập -->
+        <Button Grid.Row="2" 
+                Content="Đăng nhập" 
+                Height="42" 
+                Command="{Binding LoginCommand}"
+                Background="#3182CE" 
+                Foreground="White" 
+                FontWeight="Bold" 
+                FontSize="14"
+                VerticalAlignment="Top" 
+                Cursor="Hand" 
+                BorderThickness="0">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+    </Grid>
+</Window>

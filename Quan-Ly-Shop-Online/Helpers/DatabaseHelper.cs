@@ -12,10 +12,17 @@ namespace Quan_Ly_Shop_Online.Data {
                     if (parameters != null) {
                         cmd.Parameters.AddRange(parameters);
                     }
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd)) {
-                        DataTable dt = new DataTable();
-                        adapter.Fill(dt);
-                        return dt;
+                    try {
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd)) {
+                            DataTable dt = new DataTable();
+                            adapter.Fill(dt);
+                            return dt;
+                        }
+                    }
+                    catch (SqlException ex) {
+                        System.Diagnostics.Debug.WriteLine($"[SQL ERROR] Câu lệnh: {query}");
+                        System.Diagnostics.Debug.WriteLine($"[SQL ERROR] Chi tiết: {ex.Message}");
+                        throw;
                     }
                 }
             }
@@ -25,11 +32,19 @@ namespace Quan_Ly_Shop_Online.Data {
         public static int ExecuteNonQuery(string query, SqlParameter[] parameters) {
             using (SqlConnection conn = new SqlConnection(connectionString)) {
                 using (SqlCommand cmd = new SqlCommand(query, conn)) {
-                    cmd.Parameters.AddRange(parameters);
-                    conn.Open();
-                    return cmd.ExecuteNonQuery();
+                    try {
+                        cmd.Parameters.AddRange(parameters);
+                        conn.Open();
+                        return cmd.ExecuteNonQuery();
+                    }
+                    catch (SqlException ex) {
+                        System.Diagnostics.Debug.WriteLine($"[SQL ERROR] Câu lệnh: {query}");
+                        System.Diagnostics.Debug.WriteLine($"[SQL ERROR] Chi tiết: {ex.Message}");
+                        throw;
+                    }
                 }
             }
         }
     }
 }
+
