@@ -24,13 +24,13 @@
                     <TextBlock Margin="0,12,0,0" FontSize="30" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Text="Hàng hóa" />
                     <TextBlock Margin="0,6,0,0" Foreground="{StaticResource TextSecondaryBrush}" Text="Theo dõi tồn kho, giá bán và tình trạng hàng hóa của cửa hàng." />
                 </StackPanel>
-                <StackPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                    <Button VerticalContentAlignment="Center"
-                            Content="＋  Thêm hàng hóa"
-                            IsEnabled="False"
-                            Style="{StaticResource PrimaryButtonStyle}" />
-                    <TextBlock Margin="0,7,0,0" HorizontalAlignment="Right" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" Text="Sắp có trong giai đoạn CRUD" />
-                </StackPanel>
+                <Button Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        VerticalContentAlignment="Center"
+                        Command="{Binding AddProductCommand}"
+                        Content="＋  Thêm hàng hóa"
+                        Style="{StaticResource PrimaryButtonStyle}" />
             </Grid>
 
             <UniformGrid Grid.Row="1" Margin="0,28,0,22" Columns="3">

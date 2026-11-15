@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Input;
 using System.Windows.Data;
 using Quan_Ly_Shop_Online.Models;
 
@@ -18,7 +19,10 @@ public class GoodsViewModel : ViewModelBase {
         FilteredProducts.Filter = MatchesFilter;
         TotalProducts = products.Count;
         LowStockCount = products.Count(product => product.Stock <= 10);
+        AddProductCommand = new RelayCommand(OpenAddProduct, _ => true);
     }
+
+    public event EventHandler? AddProductRequested;
 
     public ObservableCollection<string> Categories { get; }
 
@@ -31,6 +35,8 @@ public class GoodsViewModel : ViewModelBase {
     public int CategoryCount => Categories.Count - 1;
 
     public int ResultCount => FilteredProducts.Cast<object>().Count();
+
+    public ICommand AddProductCommand { get; }
 
     public string SearchText {
         get => _searchText;
@@ -69,6 +75,10 @@ public class GoodsViewModel : ViewModelBase {
         var matchesCategory = SelectedCategory == AllCategories || product.Category == SelectedCategory;
 
         return matchesSearch && matchesCategory;
+    }
+
+    private void OpenAddProduct(object parameter) {
+        AddProductRequested?.Invoke(this, EventArgs.Empty);
     }
 
     private void RefreshProducts() {
