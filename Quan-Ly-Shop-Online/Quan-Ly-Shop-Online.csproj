@@ -8,13 +8,17 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
-  
+
   <ItemGroup>
-    <Folder Include="Models\" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.2.0" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="7.1.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Assets\login_shop_icon.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
 </Project>

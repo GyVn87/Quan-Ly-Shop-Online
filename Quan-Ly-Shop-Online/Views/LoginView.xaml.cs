@@ -10,15 +10,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Quan_Ly_Shop_Online.Views
-{
+namespace Quan_Ly_Shop_Online.Views {
     /// <summary>
     /// Interaction logic for LoginView.xaml
     /// </summary>
-    public partial class LoginView : Window
-    {
-        public LoginView()
-        {
+    public partial class LoginView : Window {
+        public LoginView() {
             InitializeComponent();
         }
     }

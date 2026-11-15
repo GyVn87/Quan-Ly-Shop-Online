@@ -11,13 +11,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Quan_Ly_Shop_Online.CustomControls
-{
+namespace Quan_Ly_Shop_Online.CustomControls {
     /// <summary>
     /// Interaction logic for BindablePasswordBox.xaml
     /// </summary>
-    public partial class BindablePasswordBox : UserControl
-    {
+    public partial class BindablePasswordBox : UserControl {
         // Fields
         public static readonly DependencyProperty PasswordProperty =
             DependencyProperty.Register(
@@ -28,20 +26,17 @@ namespace Quan_Ly_Shop_Online.CustomControls
             );
 
         // Properties
-        public string Password
-        {
+        public string Password {
             get => (string)GetValue(PasswordProperty);
             set => SetValue(PasswordProperty, value);
         }
 
         // Constructors
-        public BindablePasswordBox()
-        {
+        public BindablePasswordBox() {
             InitializeComponent();
         }
 
-        private void OnPasswordChange(object sender, RoutedEventArgs e)
-        {
+        private void OnPasswordChange(object sender, RoutedEventArgs e) {
             Password = BindablePasswordBoxControl.Password;
         }
     }
