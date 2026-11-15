@@ -10,33 +10,63 @@
             </Grid.RowDefinitions>
 
             <StackPanel>
-                <TextBlock FontSize="28" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Text="Trang chủ" />
-                <TextBlock Margin="0,6,0,0" Foreground="{StaticResource TextSecondaryBrush}" Text="Tổng quan hoạt động kho hàng của cửa hàng." />
+                <TextBlock FontSize="28" 
+                           FontWeight="SemiBold"
+                           Foreground="{StaticResource TextPrimaryBrush}"
+                           Text="Trang chủ" />
+                <TextBlock Margin="0,6,0,0" 
+                           Foreground="{StaticResource TextSecondaryBrush}"
+                           Text="Tổng quan hoạt động kho hàng của cửa hàng." />
             </StackPanel>
 
-            <UniformGrid Grid.Row="1" Margin="0,28,0,32" Columns="4">
-                <Border Margin="0,0,14,0" Style="{StaticResource CardStyle}">
+            <UniformGrid Grid.Row="1" 
+                         Margin="0,28,0,32"
+                         Columns="4">
+                <Border Margin="0,0,14,0"
+                        Style="{StaticResource CardStyle}">
                     <StackPanel>
-                        <TextBlock Foreground="{StaticResource TextSecondaryBrush}" Text="Tổng hàng hóa" />
-                        <TextBlock Margin="0,9,0,0" FontSize="28" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Text="{Binding TotalProducts}" />
+                        <TextBlock Foreground="{StaticResource TextSecondaryBrush}" 
+                                   Text="Tổng hàng hóa" />
+                        <TextBlock Margin="0,9,0,0"
+                                   FontSize="28"
+                                   FontWeight="SemiBold"
+                                   Foreground="{StaticResource TextPrimaryBrush}"
+                                   Text="{Binding TotalProducts}" />
                     </StackPanel>
                 </Border>
-                <Border Margin="0,0,14,0" Style="{StaticResource CardStyle}">
+                <Border Margin="0,0,14,0" 
+                        Style="{StaticResource CardStyle}">
                     <StackPanel>
-                        <TextBlock Foreground="{StaticResource TextSecondaryBrush}" Text="Còn hàng" />
-                        <TextBlock Margin="0,9,0,0" FontSize="28" FontWeight="SemiBold" Foreground="#15803D" Text="{Binding InStockProducts}" />
+                        <TextBlock Foreground="{StaticResource TextSecondaryBrush}"
+                                   Text="Còn hàng" />
+                        <TextBlock Margin="0,9,0,0" 
+                                   FontSize="28"
+                                   FontWeight="SemiBold"
+                                   Foreground="#15803D"
+                                   Text="{Binding InStockProducts}" />
                     </StackPanel>
                 </Border>
-                <Border Margin="0,0,14,0" Style="{StaticResource CardStyle}">
+                <Border Margin="0,0,14,0" 
+                        Style="{StaticResource CardStyle}">
                     <StackPanel>
-                        <TextBlock Foreground="{StaticResource TextSecondaryBrush}" Text="Sắp hết hàng" />
-                        <TextBlock Margin="0,9,0,0" FontSize="28" FontWeight="SemiBold" Foreground="#D97706" Text="{Binding LowStockCount}" />
+                        <TextBlock Foreground="{StaticResource TextSecondaryBrush}"
+                                   Text="Sắp hết hàng" />
+                        <TextBlock Margin="0,9,0,0"
+                                   FontSize="28"
+                                   FontWeight="SemiBold"
+                                   Foreground="#D97706"
+                                   Text="{Binding LowStockCount}" />
                     </StackPanel>
                 </Border>
                 <Border Style="{StaticResource CardStyle}">
                     <StackPanel>
-                        <TextBlock Foreground="{StaticResource TextSecondaryBrush}" Text="Giá trị tồn kho" />
-                        <TextBlock Margin="0,9,0,0" FontSize="24" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Text="{Binding InventoryValue, StringFormat={}{0:N0} ₫}" />
+                        <TextBlock Foreground="{StaticResource TextSecondaryBrush}"
+                                   Text="Giá trị tồn kho" />
+                        <TextBlock Margin="0,9,0,0"
+                                   FontSize="24"
+                                   FontWeight="SemiBold"
+                                   Foreground="{StaticResource TextPrimaryBrush}"
+                                   Text="{Binding InventoryValue, StringFormat={}{0:N0} ₫}" />
                     </StackPanel>
                 </Border>
             </UniformGrid>
@@ -48,10 +78,17 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <StackPanel>
-                        <TextBlock FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Text="Hàng hóa cần chú ý" />
-                        <TextBlock Margin="0,4,0,0" Foreground="{StaticResource TextSecondaryBrush}" Text="Các mặt hàng đã hết hoặc sắp hết tồn kho." />
+                        <TextBlock FontSize="18"
+                                   FontWeight="SemiBold" 
+                                   Foreground="{StaticResource TextPrimaryBrush}"
+                                   Text="Hàng hóa cần chú ý" />
+                        <TextBlock Margin="0,4,0,0"
+                                   Foreground="{StaticResource TextSecondaryBrush}" 
+                                   Text="Các mặt hàng đã hết hoặc sắp hết tồn kho." />
                     </StackPanel>
-                    <ItemsControl Grid.Row="1" Margin="0,20,0,0" ItemsSource="{Binding LowStockProducts}">
+                    <ItemsControl Grid.Row="1"
+                                  Margin="0,20,0,0"
+                                  ItemsSource="{Binding LowStockProducts}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid Margin="0,0,0,12">
@@ -60,15 +97,22 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
                                     <StackPanel>
-                                        <TextBlock FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Text="{Binding Name}" />
-                                        <TextBlock Margin="0,2,0,0" Foreground="{StaticResource TextSecondaryBrush}">
+                                        <TextBlock FontWeight="SemiBold"
+                                                   Foreground="{StaticResource TextPrimaryBrush}"
+                                                   Text="{Binding Name}" />
+                                        <TextBlock Margin="0,2,0,0"
+                                                   Foreground="{StaticResource TextSecondaryBrush}">
                                             <Run Text="{Binding Code}" />
                                             <Run Text=" • " />
                                             <Run Text="{Binding Category}" />
                                         </TextBlock>
                                     </StackPanel>
-                                    <Border Grid.Column="1" Padding="10,4" Background="#FEF3C7" CornerRadius="12">
-                                        <TextBlock Foreground="#92400E" Text="{Binding Stock, StringFormat={}{0} sản phẩm}" />
+                                    <Border Grid.Column="1" 
+                                            Padding="10,4"
+                                            Background="#FEF3C7"
+                                            CornerRadius="12">
+                                        <TextBlock Foreground="#92400E"
+                                                   Text="{Binding Stock, StringFormat={}{0} sản phẩm}" />
                                     </Border>
                                 </Grid>
                             </DataTemplate>

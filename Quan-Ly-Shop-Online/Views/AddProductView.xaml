@@ -198,7 +198,8 @@
                                 </StackPanel>
                             </Button>
 
-                            <StackPanel Margin="0,14,0,0" Orientation="Horizontal">
+                            <StackPanel Margin="0,14,0,0"
+                                        Orientation="Horizontal">
                                 <Button Command="{Binding SelectImagesCommand}"
                                         Style="{StaticResource ImageSlotButtonStyle}">
                                     <StackPanel>
@@ -214,7 +215,8 @@
                                     </StackPanel>
                                 </Button>
 
-                                <ItemsControl Margin="8,0,0,0" ItemsSource="{Binding ImagePaths}">
+                                <ItemsControl Margin="8,0,0,0"
+                                              ItemsSource="{Binding ImagePaths}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <StackPanel Orientation="Horizontal" />

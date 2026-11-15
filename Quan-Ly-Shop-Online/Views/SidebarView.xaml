@@ -33,7 +33,9 @@
                            Text="Hệ thống nội bộ" />
             </StackPanel>
 
-            <ItemsControl Grid.Row="1" Margin="0,38,0,0" ItemsSource="{Binding NavigationItems}">
+            <ItemsControl Grid.Row="1"
+                          Margin="0,38,0,0"
+                          ItemsSource="{Binding NavigationItems}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Button Command="{Binding DataContext.NavigateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
@@ -49,26 +51,38 @@
                                        Stretch="Uniform">
                                     <Image.Style>
                                         <Style TargetType="Image">
-                                            <Setter Property="Opacity" Value="0.75" />
+                                            <Setter Property="Opacity" 
+                                                    Value="0.75" />
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsEnabled}" Value="False">
-                                                    <Setter Property="Opacity" Value="0.35" />
+                                                <DataTrigger Binding="{Binding IsEnabled}"
+                                                             Value="False">
+                                                    <Setter Property="Opacity"
+                                                            Value="0.35" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </Image.Style>
                                 </Image>
-                                <TextBlock VerticalAlignment="Center" Text="{Binding Title}" />
+                                <TextBlock VerticalAlignment="Center"
+                                           Text="{Binding Title}" />
                             </StackPanel>
                         </Button>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-            <Border Grid.Row="2" Padding="12" Background="#EFF6FF" CornerRadius="8">
+            <Border Grid.Row="2" 
+                    Padding="12"
+                    Background="#EFF6FF"
+                    CornerRadius="8">
                 <StackPanel>
-                    <TextBlock FontWeight="SemiBold" Foreground="{StaticResource PrimaryBrush}" Text="Phiên bản demo" />
-                    <TextBlock Margin="0,3,0,0" Foreground="{StaticResource TextSecondaryBrush}" Text="Dữ liệu hiện là mẫu." TextWrapping="Wrap" />
+                    <TextBlock FontWeight="SemiBold"
+                               Foreground="{StaticResource PrimaryBrush}"
+                               Text="Phiên bản demo" />
+                    <TextBlock Margin="0,3,0,0"
+                               Foreground="{StaticResource TextSecondaryBrush}" 
+                               Text="Dữ liệu hiện là mẫu."
+                               TextWrapping="Wrap" />
                 </StackPanel>
             </Border>
         </Grid>
