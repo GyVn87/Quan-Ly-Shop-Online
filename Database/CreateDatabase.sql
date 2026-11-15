@@ -1,0 +1,13 @@
+CREATE DATABASE ShopLocalDb;
+GO
+
+USE ShopLocalDb;
+GO
+
+CREATE TABLE Users (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Username NVARCHAR(50) NOT NULL UNIQUE,
+    PasswordHash NVARCHAR(255) NOT NULL,
+    Role NVARCHAR(50) NOT NULL
+);
+GO
