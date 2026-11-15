@@ -17,8 +17,4 @@
   <ItemGroup>
     <Resource Include="Assets\*.png" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Quan_Ly_Shop_Online.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -15,8 +16,46 @@ namespace Quan_Ly_Shop_Online.Views {
     /// Interaction logic for LoginView.xaml
     /// </summary>
     public partial class LoginView : Window {
+        // Fields
+        private LoginViewModel? _viewModel;
+
+        // Constructors
         public LoginView() {
             InitializeComponent();
+            Loaded += OnLoaded;
+            Unloaded += OnUnloaded;
+        }
+
+        // Methods
+        private void OnLoaded(object sender, RoutedEventArgs e) {
+            if (DataContext is not LoginViewModel viewModel || ReferenceEquals(_viewModel, viewModel)) {
+                return;
+            }
+
+            DetachViewModel();
+            _viewModel = viewModel;
+            _viewModel.LoginSuccess += OnLoginSuccess;
+        }
+
+
+        private void OnUnloaded(object sender, RoutedEventArgs e) {
+            DetachViewModel();
+        }
+
+        private void DetachViewModel() {
+            if (_viewModel is null) {
+                return;
+            }
+
+            _viewModel.LoginSuccess -= OnLoginSuccess; 
+            _viewModel = null;
+        }
+
+        private void OnLoginSuccess(object? sender, EventArgs e) {
+            var mainWindow = new MainWindow();
+            mainWindow.Show();
+
+            this.Close();
         }
     }
 }

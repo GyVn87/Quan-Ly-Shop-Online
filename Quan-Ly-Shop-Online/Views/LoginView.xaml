@@ -77,22 +77,46 @@
         </StackPanel>
         
         <!-- Nút đăng nhập -->
-        <Button Grid.Row="2" 
-                Content="Đăng nhập" 
-                Height="42" 
-                Command="{Binding LoginCommand}"
-                Background="#3182CE" 
-                Foreground="White" 
-                FontWeight="Bold" 
-                FontSize="14"
-                VerticalAlignment="Top" 
-                Cursor="Hand" 
-                BorderThickness="0">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="6"/>
-                </Style>
-            </Button.Resources>
-        </Button>
+        <StackPanel Grid.Row="2">
+            <TextBlock Text="{Binding ErrorMessage}"
+                       Foreground="Red"
+                       FontSize="11"
+                       Margin="0,10"
+                       HorizontalAlignment="Center"/>
+            <Button Content="Đăng nhập" 
+                    Height="42" 
+                    Command="{Binding LoginCommand}"
+                    FontWeight="Bold" 
+                    FontSize="14"
+                    VerticalAlignment="Top" 
+                    Cursor="Hand" 
+                    BorderThickness="0">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#3182CE"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="border" 
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="6">
+                                        <ContentPresenter HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter TargetName="border" 
+                                            Property="Background" Value="LightSlateGray"/>
+                                            <Setter Property="Foreground" Value="#94A3B8"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </StackPanel>
     </Grid>
 </Window>
