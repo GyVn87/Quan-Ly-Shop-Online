@@ -7,7 +7,6 @@ namespace Quan_Ly_Shop_Online.ViewModels;
 
 public class AddProductViewModel : ViewModelBase {
     private const int MaximumImageCount = 3;
-
     private string _productName = string.Empty;
     private string _description = string.Empty;
     private string _purchasePrice = string.Empty;

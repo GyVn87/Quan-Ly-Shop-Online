@@ -1,17 +1,20 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Quan_Ly_Shop_Online.Models;
-using Quan_Ly_Shop_Online.Services;
+using Quan_Ly_Shop_Online.Repositories;
 
 namespace Quan_Ly_Shop_Online.ViewModels;
 
 public class MainViewModel : ViewModelBase {
     private object _currentViewModel;
 
+    private readonly ProductRepository _productRepository;
+
     public MainViewModel() {
-        var catalog = new ProductCatalog();
-        Dashboard = new DashboardViewModel(catalog.Products);
-        Goods = new GoodsViewModel(catalog.Products);
+        _productRepository = new();
+        
+        Dashboard = new DashboardViewModel(_productRepository);
+        Goods = new GoodsViewModel(_productRepository);
 
         NavigationItems = [
             new("Trang chủ", "pack://application:,,,/Assets/home.png", NavigationTarget.Dashboard),
