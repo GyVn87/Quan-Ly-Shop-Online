@@ -72,7 +72,11 @@
                        FontWeight="DemiBold" 
                        Margin="0,0,0,5"/>
             <Border Style="{StaticResource RoundedInputBorder}">
-                <customControls:BindablePasswordBox Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <customControls:BindablePasswordBox Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <customControls:BindablePasswordBox.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding LoginCommand}"/> 
+                    </customControls:BindablePasswordBox.InputBindings>
+                </customControls:BindablePasswordBox>
             </Border>
         </StackPanel>
         

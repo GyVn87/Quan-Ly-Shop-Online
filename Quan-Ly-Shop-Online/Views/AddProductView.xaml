@@ -366,7 +366,7 @@
                                             <Grid Grid.Column="1">
                                                 <TextBox x:Name="PurchasePriceTextBox"
                                                          Style="{StaticResource BareDialogTextBoxStyle}"
-                                                         Text="{Binding PurchasePrice, UpdateSourceTrigger=PropertyChanged}" />
+                                                         Text="{Binding ImportPrice, UpdateSourceTrigger=PropertyChanged}" />
                                                 <TextBlock Margin="13,0,0,0"
                                                            VerticalAlignment="Center"
                                                            Foreground="#94A3B8"
@@ -483,67 +483,23 @@
                             </Grid>
 
                             <TextBlock Margin="0,18,0,7" Style="{StaticResource DialogLabelStyle}">
-                                <Run Text="Tag" />
+                                <Run Text="Doanh mục" />
                                 <Run Foreground="#64748B" Text="  ⓘ" />
                             </TextBlock>
                             <Grid>
-                                <TextBox x:Name="TagInputTextBox"
-                                         Style="{StaticResource DialogTextBoxStyle}"
-                                         Text="{Binding TagInput, UpdateSourceTrigger=PropertyChanged}">
-                                    <TextBox.InputBindings>
-                                        <KeyBinding Key="Enter" Command="{Binding AddTagCommand}" />
-                                    </TextBox.InputBindings>
-                                </TextBox>
-                                <TextBlock Margin="14,0,0,0"
-                                           VerticalAlignment="Center"
-                                           Foreground="#94A3B8"
-                                           IsHitTestVisible="False"
-                                           Text="Nhập tag và nhấn Enter để thêm">
-                                    <TextBlock.Style>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="Visibility" Value="Collapsed" />
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Text, ElementName=TagInputTextBox}" Value="">
-                                                    <Setter Property="Visibility" Value="Visible" />
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBlock.Style>
-                                </TextBlock>
+                                <Border Background="White"
+                                        BorderBrush="{StaticResource BorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="8">
+                                    <ComboBox ItemsSource="{Binding Categories}"
+                                              Text="{Binding Category, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                              IsEditable="True"
+                                              Background="Transparent"
+                                              BorderThickness="0"
+                                              Padding="10,6"
+                                              VerticalContentAlignment="Center" />
+                                </Border>
                             </Grid>
-
-                            <ItemsControl Margin="0,10,0,0" ItemsSource="{Binding Tags}">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapPanel />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Border Margin="0,0,7,7"
-                                                Padding="10,5"
-                                                Background="#DBEAFE"
-                                                CornerRadius="12">
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock VerticalAlignment="Center"
-                                                           FontSize="12"
-                                                           FontWeight="SemiBold"
-                                                           Foreground="#1D4ED8"
-                                                           Text="{Binding}" />
-                                                <Button Margin="7,0,0,0"
-                                                        Padding="0"
-                                                        Background="Transparent"
-                                                        BorderThickness="0"
-                                                        Command="{Binding DataContext.RemoveTagCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                                        CommandParameter="{Binding}"
-                                                        Content="×"
-                                                        Cursor="Hand"
-                                                        Foreground="#1D4ED8" />
-                                            </StackPanel>
-                                        </Border>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>

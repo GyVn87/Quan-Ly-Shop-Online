@@ -1,3 +1,5 @@
+using Quan_Ly_Shop_Online.Models;
+using Quan_Ly_Shop_Online.Repositories;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
@@ -6,54 +8,43 @@ using System.Windows.Input;
 namespace Quan_Ly_Shop_Online.ViewModels;
 
 public class AddProductViewModel : ViewModelBase {
+    private readonly ProductRepository _productRepository;
     private const int MaximumImageCount = 3;
     private string _productName = string.Empty;
     private string _description = string.Empty;
-    private string _purchasePrice = string.Empty;
+    private string _importPrice = string.Empty;
     private string _salePrice = string.Empty;
     private string _quantity = "0";
-    private string _tagInput = string.Empty;
+    private string _category = string.Empty;
     private string _errorMessage = string.Empty;
 
-    public AddProductViewModel() {
-        Tags = ["#điện tử", "#phụ kiện", "#bán chạy"];
+    public AddProductViewModel(ProductRepository productRepository) {
+        _productRepository = productRepository;
+
+        Categories = [];
         ImagePaths = [];
         EmptyImageSlots = [0, 1, 2];
+
+        UpdateCategories();
 
         SelectImagesCommand = new RelayCommand(RequestImageSelection, _ => ImagePaths.Count < MaximumImageCount);
         RemoveImageCommand = new RelayCommand(RemoveImage, parameter => parameter is string);
         IncreaseQuantityCommand = new RelayCommand(_ => ChangeQuantity(1), _ => true);
         DecreaseQuantityCommand = new RelayCommand(_ => ChangeQuantity(-1), _ => true);
-        AddTagCommand = new RelayCommand(_ => AddTag(), _ => true);
-        RemoveTagCommand = new RelayCommand(RemoveTag, parameter => parameter is string);
         CancelCommand = new RelayCommand(_ => CloseRequested?.Invoke(false), _ => true);
         SubmitCommand = new RelayCommand(Submit, _ => true);
     }
 
     public event EventHandler? SelectImagesRequested;
-
     public event Action<bool>? CloseRequested;
-
-    public ObservableCollection<string> Tags { get; }
-
     public ObservableCollection<string> ImagePaths { get; }
-
     public ObservableCollection<int> EmptyImageSlots { get; }
-
+    public ObservableCollection<string> Categories { get; }
     public ICommand SelectImagesCommand { get; }
-
     public ICommand RemoveImageCommand { get; }
-
     public ICommand IncreaseQuantityCommand { get; }
-
     public ICommand DecreaseQuantityCommand { get; }
-
-    public ICommand AddTagCommand { get; }
-
-    public ICommand RemoveTagCommand { get; }
-
     public ICommand CancelCommand { get; }
-
     public ICommand SubmitCommand { get; }
 
     public string ProductName {
@@ -66,9 +57,9 @@ public class AddProductViewModel : ViewModelBase {
         set => SetValue(ref _description, value);
     }
 
-    public string PurchasePrice {
-        get => _purchasePrice;
-        set => SetValue(ref _purchasePrice, value);
+    public string ImportPrice {
+        get => _importPrice;
+        set => SetValue(ref _importPrice, value);
     }
 
     public string SalePrice {
@@ -80,10 +71,10 @@ public class AddProductViewModel : ViewModelBase {
         get => _quantity;
         set => SetValue(ref _quantity, value);
     }
-
-    public string TagInput {
-        get => _tagInput;
-        set => SetValue(ref _tagInput, value);
+   
+    public string Category {
+        get => _category;
+        set => SetValue(ref _category, value);
     }
 
     public string ErrorMessage {
@@ -150,33 +141,13 @@ public class AddProductViewModel : ViewModelBase {
         Quantity = Math.Max(0, currentQuantity + difference).ToString(CultureInfo.InvariantCulture);
     }
 
-    private void AddTag() {
-        var tag = TagInput.Trim();
-        if (string.IsNullOrWhiteSpace(tag)) {
-            return;
-        }
-
-        tag = tag.StartsWith('#') ? tag : $"#{tag}";
-        if (!Tags.Contains(tag, StringComparer.OrdinalIgnoreCase)) {
-            Tags.Add(tag);
-        }
-
-        TagInput = string.Empty;
-    }
-
-    private void RemoveTag(object parameter) {
-        if (parameter is string tag) {
-            Tags.Remove(tag);
-        }
-    }
-
     private void Submit(object parameter) {
         if (string.IsNullOrWhiteSpace(ProductName)) {
             ErrorMessage = "Vui lòng nhập tên hàng hóa.";
             return;
         }
 
-        if (!TryReadAmount(PurchasePrice, out var purchasePrice) || purchasePrice < 0) {
+        if (!TryReadAmount(ImportPrice, out var purchasePrice) || purchasePrice < 0) {
             ErrorMessage = "Giá nhập phải là một số hợp lệ và không âm.";
             return;
         }
@@ -191,12 +162,34 @@ public class AddProductViewModel : ViewModelBase {
             return;
         }
 
+        if (string.IsNullOrWhiteSpace(Category)) {
+            ErrorMessage = "Xin vui lòng chọn doanh mục phù hợp";
+            return;
+        }
+
         ErrorMessage = string.Empty;
+
+        ProductModel newProduct = new() {
+            ProductName = this.ProductName,
+            ImportPrice = Convert.ToInt32(this.ImportPrice),
+            Price = Convert.ToInt32(this.SalePrice),
+            Category = this.Category,
+            Stock = Convert.ToInt32(this.Quantity)
+        };
+        _productRepository.Add(newProduct);
+
         CloseRequested?.Invoke(true);
     }
 
     private static bool TryReadAmount(string value, out decimal amount) {
         return decimal.TryParse(value, NumberStyles.Number, CultureInfo.CurrentCulture, out amount)
             || decimal.TryParse(value, NumberStyles.Number, CultureInfo.InvariantCulture, out amount);
+    }
+
+    private void UpdateCategories() {
+        List<ProductModel> latestProducts = _productRepository.GetAll();
+        Categories.Clear();
+        foreach (string category in latestProducts.Select(product => product.Category).Distinct().OrderBy(category => category))
+            Categories.Add(category);
     }
 }
