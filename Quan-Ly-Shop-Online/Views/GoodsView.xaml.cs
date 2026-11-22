@@ -28,7 +28,11 @@ public partial class GoodsView : UserControl {
     }
 
     private void OnAddProductRequested(object? sender, EventArgs e) {
-        var dialog = new AddProductView {
+        if (_viewModel is null) 
+            return;
+
+        var addViewModel = new AddProductViewModel(_viewModel.ProductRepository);
+        var dialog = new AddProductView(addViewModel) {
             Owner = Window.GetWindow(this)
         };
 

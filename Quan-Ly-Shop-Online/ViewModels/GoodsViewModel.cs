@@ -30,6 +30,7 @@ public class GoodsViewModel : ViewModelBase {
         ReloadFromRepository();
     }
 
+    public ProductRepository ProductRepository => _productRepository;
     public event EventHandler? AddProductRequested;
     public ObservableCollection<string> Categories { get; }
     public ICollectionView FilteredProducts { get; }

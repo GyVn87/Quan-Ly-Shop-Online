@@ -13,7 +13,7 @@ namespace Quan_Ly_Shop_Online.Repositories {
         public List<ProductModel> GetAll() {
             List<ProductModel> result = new();
             const string query = """
-                SELECT Id, ProductName, Category, Price, Stock
+                SELECT Id, ProductName, Category, ImportPrice, Price, Stock
                 FROM Products
                 """;
         
@@ -24,6 +24,7 @@ namespace Quan_Ly_Shop_Online.Repositories {
                     Id = row["Id"]?.ToString() ?? String.Empty,
                     ProductName = row["ProductName"]?.ToString() ?? String.Empty,
                     Category = row["Category"]?.ToString() ?? String.Empty,
+                    ImportPrice = Convert.ToInt32(row["ImportPrice"]),
                     Price = Convert.ToInt32(row["Price"]),
                     Stock = Convert.ToInt32(row["Stock"])
                 });
@@ -34,13 +35,14 @@ namespace Quan_Ly_Shop_Online.Repositories {
 
         public string Add(ProductModel addedProduct) {
             const string query = """
-                INSERT INTO Products (ProductName, Category, Price, Stock)
+                INSERT INTO Products (ProductName, Category, ImportPrice, Price, Stock)
                 OUTPUT INSERTED.Id
-                VALUES (@productName, @category, @price, @stock);
+                VALUES (@productName, @category, @importPrice, @price, @stock);
                 """;
             SqlParameter[] queryParameters = [
-                new("@name", addedProduct.ProductName),
+                new("@productName", addedProduct.ProductName),
                 new("@category", addedProduct.Category),
+                new("@importPrice", addedProduct.ImportPrice),
                 new("@price", addedProduct.Price),
                 new("@stock", addedProduct.Stock)
             ];
@@ -58,13 +60,15 @@ namespace Quan_Ly_Shop_Online.Repositories {
                 UPDATE Products
                 SET ProductName = @productName,
                     Category = @category,
+                    ImportPrice = @importPrice,
                     Price = @price,
                     Stock = @stock
                 WHERE Id = @id
                 """;
             SqlParameter[] queryParameters = [
-                new("@name", updatedProduct.ProductName),
+                new("@productName", updatedProduct.ProductName),
                 new("@category", updatedProduct.Category),
+                new("@importPrice", updatedProduct.ImportPrice),
                 new("@price", updatedProduct.Price),
                 new("@stock", updatedProduct.Stock)
             ];

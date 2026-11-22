@@ -4,6 +4,7 @@ public class ProductModel {
     public string Id { get; set; } = string.Empty;
     public string ProductName { get; set; } = string.Empty;
     public string Category { get; set; } = string.Empty;
+    public int ImportPrice { get; set; }
     public int Price { get; set; }
     public int Stock { get; set; }
 }
