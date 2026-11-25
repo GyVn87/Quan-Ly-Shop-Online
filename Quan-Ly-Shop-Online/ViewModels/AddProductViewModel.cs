@@ -163,7 +163,7 @@ public class AddProductViewModel : ViewModelBase {
         }
 
         if (string.IsNullOrWhiteSpace(Category)) {
-            ErrorMessage = "Xin vui lòng chọn doanh mục phù hợp";
+            ErrorMessage = "Xin vui lòng chọn Danh Mục phù hợp";
             return;
         }
 

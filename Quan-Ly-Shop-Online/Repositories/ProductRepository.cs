@@ -66,6 +66,7 @@ namespace Quan_Ly_Shop_Online.Repositories {
                 WHERE Id = @id
                 """;
             SqlParameter[] queryParameters = [
+                new("@id", id),
                 new("@productName", updatedProduct.ProductName),
                 new("@category", updatedProduct.Category),
                 new("@importPrice", updatedProduct.ImportPrice),
