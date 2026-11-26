@@ -13,24 +13,6 @@
         WindowStartupLocation="CenterOwner"
         WindowStyle="None">
     <Window.Resources>
-        <Style x:Key="DialogLabelStyle" TargetType="TextBlock">
-            <Setter Property="Margin" Value="0,0,0,7" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
-        </Style>
-
-        <Style x:Key="DialogTextBoxStyle" TargetType="TextBox">
-            <Setter Property="Height" Value="44" />
-            <Setter Property="Padding" Value="13,8" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="Background" Value="White" />
-            <Setter Property="BorderBrush" Value="#CBD5E1" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
-        </Style>
-
         <Style x:Key="BareDialogTextBoxStyle"
                BasedOn="{StaticResource DialogTextBoxStyle}"
                TargetType="TextBox">
@@ -483,7 +465,7 @@
                             </Grid>
 
                             <TextBlock Margin="0,18,0,7" Style="{StaticResource DialogLabelStyle}">
-                                <Run Text="Doanh mục" />
+                                <Run Text="Danh Mục" />
                                 <Run Foreground="#64748B" Text="  ⓘ" />
                             </TextBlock>
                             <Grid>
