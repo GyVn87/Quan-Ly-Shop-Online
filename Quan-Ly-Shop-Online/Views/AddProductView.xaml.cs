@@ -10,10 +10,10 @@ public partial class AddProductView : Window {
     private const long MaximumImageSize = 5 * 1024 * 1024;
     private readonly AddProductViewModel _viewModel;
 
-    public AddProductView() {
+    public AddProductView(AddProductViewModel viewModel) {
         InitializeComponent();
 
-        _viewModel = new AddProductViewModel();
+        _viewModel = viewModel;
         DataContext = _viewModel;
         _viewModel.CloseRequested += OnCloseRequested;
         _viewModel.SelectImagesRequested += OnSelectImagesRequested;

@@ -55,20 +55,21 @@ namespace Quan_Ly_Shop_Online.ViewModels {
         }
 
         private void ExecuteLogin(object obj) {
-            string query = "SELECT PasswordHash " +
-                           "FROM Users " +
-                           "WHERE Username = @username";
+            const string query = "SELECT PasswordHash " +
+                                 "FROM Users " +
+                                 "WHERE Username COLLATE Latin1_General_CS_AS = @username";
             SqlParameter[] queryParameters = {
                 new("@username", Username)
             };
-            DataTable resultTable = DatabaseHelper.ExecuteQuery(query, queryParameters);
 
-            if (resultTable.Rows.Count == 0) {
+            object? result = DatabaseHelper.ExecuteScalar(query, queryParameters);
+
+            if (result is null) {
                 FailToLogin();
                 return;
             }
 
-            string storedPassword = resultTable.Rows[0]["PasswordHash"].ToString() ?? string.Empty;
+            string storedPassword = result.ToString() ?? string.Empty;
             if (!PasswordHashHelper.VerifyPassword(Password, storedPassword)) {
                 FailToLogin();
                 return;

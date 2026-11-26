@@ -72,7 +72,11 @@
                        FontWeight="DemiBold" 
                        Margin="0,0,0,5"/>
             <Border Style="{StaticResource RoundedInputBorder}">
-                <customControls:BindablePasswordBox Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <customControls:BindablePasswordBox Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <customControls:BindablePasswordBox.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding LoginCommand}"/> 
+                    </customControls:BindablePasswordBox.InputBindings>
+                </customControls:BindablePasswordBox>
             </Border>
         </StackPanel>
         
@@ -102,12 +106,12 @@
                                     Background="{TemplateBinding Background}"
                                     CornerRadius="6">
                                         <ContentPresenter HorizontalAlignment="Center"
-                                                   VerticalAlignment="Center" />
+                                                          VerticalAlignment="Center" />
                                     </Border>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsEnabled" Value="False">
                                             <Setter TargetName="border" 
-                                            Property="Background" Value="LightSlateGray"/>
+                                                    Property="Background" Value="LightSlateGray"/>
                                             <Setter Property="Foreground" Value="#94A3B8"/>
                                         </Trigger>
                                     </ControlTemplate.Triggers>

@@ -155,6 +155,20 @@
                             <TextBlock Margin="0,4,0,0"
                                        Foreground="{StaticResource TextSecondaryBrush}"
                                        Text="Dữ liệu đang hiển thị theo điều kiện tìm kiếm và danh mục." />
+                            <TextBlock Margin="0,8,0,0"
+                                       Foreground="#DC2626"
+                                       Text="{Binding ErrorMessage}"
+                                       TextWrapping="Wrap">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ErrorMessage}" Value="">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
                         </StackPanel>
                         <Border Grid.Column="1" 
                                 Padding="10,5"
@@ -186,7 +200,7 @@
                                     <DataTemplate>
                                         <TextBlock Margin="12,0"
                                                    VerticalAlignment="Center"
-                                                   Text="{Binding Code}" />
+                                                   Text="{Binding Id}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -196,7 +210,7 @@
                                     <DataTemplate>
                                         <TextBlock Margin="12,0"
                                                    VerticalAlignment="Center"
-                                                   Text="{Binding Name}" />
+                                                   Text="{Binding ProductName}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -233,6 +247,33 @@
                                         <TextBlock Margin="12,0"
                                                    VerticalAlignment="Center"
                                                    Text="{Binding Stock, StringFormat={}{0} sản phẩm}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="112" Header="THAO TÁC" CanUserSort="False">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Margin="12,0"
+                                                    VerticalAlignment="Center"
+                                                    Orientation="Horizontal">
+                                            <Button Margin="0,0,8,0"
+                                                    AutomationProperties.Name="Sửa hàng hóa"
+                                                    Command="{Binding DataContext.EditProductCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                    CommandParameter="{Binding}"
+                                                    Style="{StaticResource RowActionButtonStyle}"
+                                                    ToolTip="Xem và sửa hàng hóa">
+                                                <Image Width="16" Height="16"
+                                                       Source="pack://application:,,,/Quan-Ly-Shop-Online;component/Assets/edit.png" />
+                                            </Button>
+                                            <Button AutomationProperties.Name="Xóa hàng hóa"
+                                                    Command="{Binding DataContext.DeleteProductCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                    CommandParameter="{Binding}"
+                                                    Style="{StaticResource RowActionButtonStyle}"
+                                                    ToolTip="Xóa hàng hóa">
+                                                <Image Width="16" Height="16"
+                                                       Source="pack://application:,,,/Quan-Ly-Shop-Online;component/Assets/delete.png" />
+                                            </Button>
+                                        </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
