@@ -108,7 +108,6 @@ public class ProductDetailViewModel : ViewModelBase {
         }
 
         ProductModel updatedProduct = new() {
-            Id = ProductId,
             ProductName = ProductName.Trim(),
             Category = Category.Trim(),
             ImportPrice = importPrice,

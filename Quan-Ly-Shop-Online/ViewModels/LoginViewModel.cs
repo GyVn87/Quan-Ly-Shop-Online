@@ -57,7 +57,7 @@ namespace Quan_Ly_Shop_Online.ViewModels {
         private void ExecuteLogin(object obj) {
             const string query = "SELECT PasswordHash " +
                                  "FROM Users " +
-                                 "WHERE Username = @username";
+                                 "WHERE Username COLLATE Latin1_General_CS_AS = @username";
             SqlParameter[] queryParameters = {
                 new("@username", Username)
             };
