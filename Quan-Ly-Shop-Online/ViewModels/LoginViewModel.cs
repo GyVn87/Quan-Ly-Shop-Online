@@ -45,7 +45,9 @@ namespace Quan_Ly_Shop_Online.ViewModels {
         // Constructors
         public LoginViewModel() {
             LoginCommand = new RelayCommand(ExecuteLogin, CanExecuteLogin);
-            AddAdminAccount();
+
+            if (!CheckIfThereIsAnyUser())
+                AddFirstAdminAccount();
         }
 
         // Methods
@@ -82,10 +84,21 @@ namespace Quan_Ly_Shop_Online.ViewModels {
             ErrorMessage = "Tên đăng nhập hoặc mật khẩu có thể đã sai, xin vui lòng đăng nhập lại!";
         }
 
-        // Hàm tạm thời
-        private static void AddAdminAccount() {
+        private bool CheckIfThereIsAnyUser() {
+            const string query = """
+                    SELECT 1
+                    FROM Users;
+                """;
+
+            object? result = DatabaseHelper.ExecuteScalar(query);
+
+            return (result is not null && Convert.ToInt32(result) == 1);
+        }
+
+        // Chạy khi lần đầu sử dụng ứng dụng
+        private static void AddFirstAdminAccount() {
             string adminUsername = "Admin";
-            string rawPassword = "123"; // chỉ dùng cho việc test
+            string rawPassword = "123"; // 
             string hashedPassword = PasswordHashHelper.HashPassword(rawPassword);
 
             string addQuery = "INSERT INTO Users (Username, PasswordHash, Role) " +
